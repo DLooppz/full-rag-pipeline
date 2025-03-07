@@ -1,6 +1,6 @@
 # backend/app/main.py
 from fastapi import FastAPI
-from app.rag import generate_response
+from backend.app.rag import generate_response
 
 app = FastAPI()
 

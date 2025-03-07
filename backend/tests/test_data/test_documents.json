@@ -1,0 +1,5 @@
+[
+    "FAISS is a library for fast nearest neighbor search.",
+    "OpenAI embeddings allow converting text into vector representations.",
+    "RAG is a technique that retrieves documents before generating a response."
+]

@@ -1,8 +1,8 @@
 # backend/app/rag.py
 import openai
 import numpy as np
-from app.database import faiss_db
-from app.config import settings
+from backend.app.database import faiss_db
+from backend.app.config import settings
 
 
 def get_embedding(text: str):

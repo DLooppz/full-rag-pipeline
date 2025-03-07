@@ -1,6 +1,30 @@
-# backend/tests/test_rag.py
 import pytest
-from app.rag import get_embedding, retrieve_documents, generate_response
+import json
+import numpy as np
+from backend.app.rag import get_embedding, retrieve_documents, generate_response
+from backend.app.database import FAISSIndex
+from backend.app.config import settings
+
+# Use a separate test FAISS index
+faiss_db = FAISSIndex(index_path=settings.FAISS_TEST_INDEX_PATH)
+
+print(f"Using FAISS test index at: {settings.FAISS_TEST_INDEX_PATH}")
+
+# Load test documents
+with open("backend/tests/test_data/test_documents.json", "r") as f:
+    TEST_DOCUMENTS = json.load(f)
+
+
+# Ensure FAISS index is cleared before tests
+def setup_module(module):
+    """Clear FAISS index before running tests and add test embeddings."""
+    print(f"Clearing FAISS index at {settings.FAISS_TEST_INDEX_PATH}")
+    embeddings = np.array(
+        [get_embedding(doc) for doc in TEST_DOCUMENTS], dtype=np.float32
+    )
+    faiss_db.index.reset()  # Clear previous FAISS index
+    faiss_db.add_embeddings(embeddings)
+    print(f"Test FAISS index now contains {faiss_db.index.ntotal} vectors")
 
 
 def test_embedding():
