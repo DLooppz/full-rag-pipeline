@@ -1,6 +1,7 @@
 # backend/app/main.py
 from fastapi import FastAPI
-from backend.app.rag import generate_response
+from app.rag import generate_response
+from app.models import QueryRequest
 
 app = FastAPI()
 
@@ -11,6 +12,6 @@ def home():
 
 
 @app.post("/query/")
-def query_rag(question: str):
-    response = generate_response(question)
+def query_rag(request: QueryRequest):
+    response = generate_response(request.question)
     return {"answer": response}

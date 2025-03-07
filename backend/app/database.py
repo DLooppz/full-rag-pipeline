@@ -1,7 +1,7 @@
 import os
 import faiss
 import numpy as np
-from backend.app.config import settings
+from app.config import settings
 
 
 class FAISSIndex:
