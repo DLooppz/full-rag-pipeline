@@ -1,3 +1,7 @@
+# Ignore FAISS index files
+data/faiss_index.index
+data/test_faiss_index.index
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
